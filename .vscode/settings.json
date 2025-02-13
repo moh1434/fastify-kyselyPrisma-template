@@ -1,0 +1,17 @@
+{
+  "cSpell.words": [
+    "Awilix",
+    "FASTIFY",
+    "FJWT",
+    "signinwithapple",
+    "usecase",
+    "usecases"
+  ],
+  "cSpell.ignorePaths": ["pnpm-lock.yaml", ".env", "eslint.config.mjs"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    "source.fixAll.eslint": "always"
+  },
+  "eslint.validate": ["javascript", "typescript"],
+  "typescript.suggest.autoImports": true
+}
