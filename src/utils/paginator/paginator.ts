@@ -27,7 +27,7 @@ type paginationResult<PaginatorQueryData> = Promise<{
 /**
  * @example
     const paginatorQuery = (paginationArgs: PaginationArgs) => {
-      let where: Prisma.ProductWhereInput = {
+      let where = {
         deletedAt: null,
         ...query,
       };

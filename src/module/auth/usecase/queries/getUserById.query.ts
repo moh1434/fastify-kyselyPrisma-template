@@ -1,12 +1,14 @@
-import { type PrismaClient } from "@prisma/client";
 import { APP_ERROR } from "../../../../utils/error/predefine-error.js";
+import { KyselyDB } from "../../../../utils/type/kysely.js";
 
 export default class GetUserById {
-  constructor(private db: PrismaClient) {}
+  constructor(private db: KyselyDB) {}
   async execute(userId: string) {
-    const user = await this.db.user.findUnique({
-      where: { id: userId },
-    });
+    const user = await this.db
+      .selectFrom("User")
+      .where("User.id", "=", userId)
+      .selectAll()
+      .executeTakeFirst();
 
     if (!user) {
       throw APP_ERROR.NOT_FOUND({ resource: "user" });

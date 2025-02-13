@@ -1,22 +1,22 @@
-import { PrismaClient } from "@prisma/client";
 import { TokenPayload } from "../../../auth/dto/token.dto.js";
 import {
   uploadFileBodyDto,
   uploadFileParamsDto,
 } from "../../dto/uploadFile.dto.js";
 import { uploadFileInterface } from "../../interface/uploadFile.interface.js";
+import { KyselyDB } from "../../../../utils/type/kysely.js";
 
 export default class UploadFileQuery {
   constructor(
-    private db: PrismaClient,
+    private db: KyselyDB,
     private tokenPayload: TokenPayload,
     private uploadFileService: uploadFileInterface,
   ) {}
-  execute(body: uploadFileBodyDto, params: uploadFileParamsDto) {
-    return this.db.user.findUnique({
-      where: {
-        phone: "",
-      },
-    });
+  async execute(body: uploadFileBodyDto, params: uploadFileParamsDto) {
+    const user = await this.db
+      .selectFrom("User")
+      .selectAll()
+      .executeTakeFirst();
+    return user;
   }
 }

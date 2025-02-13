@@ -9,7 +9,17 @@ const zodEnvBooleanTransform = z
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]),
   PORT: z.string().regex(/^\d+$/).transform(Number),
-  DATABASE_URL: z.string().url(),
+  //
+  KYSELY_DATABASE: z.string(),
+  KYSELY_HOST: z.string(),
+  KYSELY_PASSWORD: z.string(),
+  KYSELY_USER: z.string(),
+  KYSELY_PORT: z.string().regex(/^\d+$/).transform(Number),
+  KYSELY_MAX_CONNECTIONS_PER_CLUSTER: z
+    .string()
+    .regex(/^\d+$/)
+    .transform(Number),
+  //
   SWAGGER_DOCS_LINK: z.string(),
   JWT_SECRET_KEY: z.string(),
   JWT_EXPIRES: z.string(),

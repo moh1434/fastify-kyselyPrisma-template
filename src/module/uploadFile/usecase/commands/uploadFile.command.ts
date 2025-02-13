@@ -3,12 +3,12 @@ import {
   uploadFileBodyDto,
   uploadFileParamsDto,
 } from "../../dto/uploadFile.dto.js";
-import { type PrismaClient } from "@prisma/client";
 import { uploadFileInterface } from "../../interface/uploadFile.interface.js";
+import { KyselyDB } from "../../../../utils/type/kysely.js";
 
 export default class UploadFileCommand {
   constructor(
-    private db: PrismaClient,
+    private db: KyselyDB,
     private tokenPayload: TokenPayload,
     private uploadFileService: uploadFileInterface,
   ) {}

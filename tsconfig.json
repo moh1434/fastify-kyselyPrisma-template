@@ -25,6 +25,6 @@
     "esm": true,
     "files": true
   },
-  "exclude": ["./prisma/seed/**"],
+  "exclude": [],
   "include": ["src/**/*.ts", "eslint.config.mjs", "src/utils/type/"]
 }

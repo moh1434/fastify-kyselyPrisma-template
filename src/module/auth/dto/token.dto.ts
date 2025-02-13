@@ -1,4 +1,4 @@
-import type { Roles } from "@prisma/client";
+import { Roles } from "../../../db/types.js";
 
 export interface TokenCreatePayload {
   id: string;

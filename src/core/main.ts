@@ -16,7 +16,7 @@ import { loggingConfig } from "../utils/log.config.js";
 import { setupErrorPlugin } from "./plugin/error.plugin.js";
 import { setupI18Plugin } from "./plugin/i18.plugin.js";
 import { setupAuthPlugin } from "../module/auth/auth.plugin.js";
-import { prismaLoadPlugin } from "./plugin/prisma.plugin.js";
+import { kyselyLoadPlugin } from "./plugin/kysely.plugin.js";
 async function init() {
   const fastify = Fastify({
     logger: loggingConfig(),
@@ -34,7 +34,7 @@ async function init() {
   // setup env
   await app.register(envPlugin);
 
-  await app.register(prismaLoadPlugin);
+  await app.register(kyselyLoadPlugin);
   await app.register(swaggerLoadPlugin);
 
   app.register(setupI18Plugin);

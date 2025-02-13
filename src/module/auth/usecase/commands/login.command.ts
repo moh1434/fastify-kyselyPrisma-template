@@ -4,10 +4,11 @@ import { APP_ERROR } from "../../../../utils/error/predefine-error.js";
 import { configSchema } from "../../../../core/plugin/env.plugin.js";
 import GetUserByPhone from "../queries/getUserByPhone.query.js";
 import { GenerateTokensService } from "../../service/generateTokens.service.js";
+import { KyselyDB } from "../../../../utils/type/kysely.js";
 
 export default class LoginCommand {
   constructor(
-    // private db: PrismaClient,
+    private db: KyselyDB,
     private config: configSchema,
     private passwordService: PasswordService,
     private getUserByPhone: GetUserByPhone,

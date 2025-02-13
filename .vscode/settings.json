@@ -3,6 +3,7 @@
     "Awilix",
     "FASTIFY",
     "FJWT",
+    "kysely",
     "signinwithapple",
     "usecase",
     "usecases"

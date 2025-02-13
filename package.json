@@ -12,21 +12,17 @@
     "prisma:migrate": "prisma migrate dev --name init",
     "prisma:generate": "prisma generate",
     "prisma:deploy": "prisma db push",
-    "prisma:seed": "prisma db seed",
     "debug": "tsx watch --inspect-brk src/core/main.ts",
     "start": "tsx watch src/core/main.ts",
     "prepare": "husky",
     "generate": "dotenv -- tsx script/di-autoload.generator.ts && dotenv -- tsx script/controller.generator.ts",
-    "format": "prettier --write \"{src,utils,middlewares,script,prisma/seed,app}/**/*.ts\"",
-    "lint": "eslint \"{src,utils,script,prisma/seed,app}/**/*.ts\" --fix",
+    "format": "prettier --write \"{src,utils,middlewares,script,app}/**/*.ts\"",
+    "lint": "eslint \"{src,utils,script,app}/**/*.ts\" --fix",
     "git:clean": "git fetch --prune && git branch | grep -v \"main\" | xargs git branch -D"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "prisma": {
-    "seed": "ts-node prisma/seed.ts"
-  },
   "lint-staged": {
     "*.{js,ts,json,md}": "pnpm format"
   },
@@ -42,7 +38,6 @@
     "@fastify/swagger": "^9.4.0",
     "@fastify/swagger-ui": "^5.2.0",
     "@keyv/redis": "^4.1.0",
-    "@prisma/client": "6.2.1",
     "apple-auth": "^1.0.9",
     "argon2": "^0.41.1",
     "awilix": "^12.0.4",
@@ -56,8 +51,10 @@
     "google-auth-library": "^9.15.0",
     "i18next": "^24.1.0",
     "keyv": "^5.2.2",
+    "kysely": "^0.27.5",
     "passport-jwt": "^4.0.1",
-    "pg": "^8.13.1"
+    "pg": "^8.13.1",
+    "prisma-kysely": "^1.8.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.16.0",
