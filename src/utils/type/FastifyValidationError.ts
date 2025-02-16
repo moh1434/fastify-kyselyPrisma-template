@@ -8,7 +8,11 @@ export interface FastifyValidationError {
     instancePath: string;
     schemaPath: string;
     params: {
-      issue: ZodIssue;
+      issue: ZodIssue & {
+        code: any;
+        expected?: any;
+        received?: any;
+      };
     };
     message: string;
   }[];

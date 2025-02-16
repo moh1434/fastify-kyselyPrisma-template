@@ -14,9 +14,16 @@ export const setupErrorPlugin = fastifyPlugin(async (fastify, opts) => {
     if (Array.isArray((error as any).validation)) {
       //zod errors
       const fastifyValidationError = error as unknown as FastifyValidationError;
+      const zodIssue = fastifyValidationError.validation[0].params.issue;
       reply.status(fastifyValidationError.statusCode).send({
         statusCode: fastifyValidationError.statusCode,
         code: fastifyValidationError.code,
+        params: {
+          code: zodIssue?.code,
+          expected: zodIssue?.expected,
+          received: zodIssue?.received,
+          path: zodIssue.path,
+        },
         message: fastifyValidationError.validation[0].message,
       });
       return;
