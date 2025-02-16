@@ -14,5 +14,8 @@
     "source.fixAll.eslint": "always"
   },
   "eslint.validate": ["javascript", "typescript"],
-  "typescript.suggest.autoImports": true
+  "typescript.suggest.autoImports": true,
+  "search.exclude": {
+    "/src/node____modules": true
+  }
 }
