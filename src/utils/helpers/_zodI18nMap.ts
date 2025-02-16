@@ -24,26 +24,6 @@ const isRecord = (value: unknown): value is Record<string, unknown> => {
   return true;
 };
 
-const getKeyAndValues = (
-  param: unknown,
-  defaultKey: string,
-): {
-  values: Record<string, unknown>;
-  key: string;
-} => {
-  if (typeof param === "string") return { key: param, values: {} };
-
-  if (isRecord(param)) {
-    const key =
-      "key" in param && typeof param.key === "string" ? param.key : defaultKey;
-    const values =
-      "values" in param && isRecord(param.values) ? param.values : {};
-    return { key, values };
-  }
-
-  return { key: defaultKey, values: {} };
-};
-
 export type MakeZodI18nMap = (option?: ZodI18nMapOption) => ZodErrorMap;
 
 export type ZodI18nMapOption = {
@@ -103,12 +83,7 @@ export const makeZodI18nMap: MakeZodI18nMap = (option) => (issue, ctx) => {
 
   switch (issue.code) {
     case ZodIssueCode.custom: {
-      const { key, values } = getKeyAndValues(
-        "zod.custom." + issue?.i18n,
-        "zod.custom",
-      );
-      message = t(key, {
-        ...values,
+      message = t(`zod.custom.${issue.i18n}`, {
         ns: defaultNs,
         defaultValue: message,
         ...path,
@@ -313,6 +288,9 @@ export const makeZodI18nMap: MakeZodI18nMap = (option) => (issue, ctx) => {
     default:
   }
 
+  if (path?.path && issue.code !== "custom") {
+    message = t(`zod.fields.${path.path}` as any) + ": " + message;
+  }
   return { message };
 };
 

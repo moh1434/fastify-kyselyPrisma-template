@@ -18,7 +18,6 @@ export const arabicTranslation = {
   },
   zod: {
     custom: {
-      test_translate: "تجربة الترجمة",
       custom: "مدخل غير صالح",
       invalid_pagination_input:
         "invalid pagination input, use one of (skip/take) or (page/perPage), not both",
@@ -110,6 +109,9 @@ export const arabicTranslation = {
           not_inclusive: "يجب أن يكون التاريخ أصغر من {{- minimum, datetime}}",
         },
       },
+    },
+    fields: {
+      password: "الرمز السري",
     },
     validations: {
       email: "البريد الإلكتروني",

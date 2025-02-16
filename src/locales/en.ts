@@ -19,7 +19,6 @@ export const englishTranslation = {
   },
   zod: {
     custom: {
-      test_translate: "test translate",
       custom: "wrong input",
       invalid_pagination_input:
         "invalid pagination input, use one of (skip/take) or (page/perPage), not both",
@@ -111,6 +110,9 @@ export const englishTranslation = {
           not_inclusive: "Date must be smaller than {{- maximum, datetime}}",
         },
       },
+    },
+    fields: {
+      password: "password",
     },
     validations: {
       email: "email",
