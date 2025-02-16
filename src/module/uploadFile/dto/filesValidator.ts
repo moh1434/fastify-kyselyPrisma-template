@@ -58,7 +58,11 @@ async function baseValidator(
   }
 
   // Attach validated file to request for route handler, zod validation
+  if (!req.body) {
+    req.body = {};
+  }
   (req.body as uploadFileBodyDto)["file"] = file;
+  return file;
 }
 
 export async function validateAnyFile(

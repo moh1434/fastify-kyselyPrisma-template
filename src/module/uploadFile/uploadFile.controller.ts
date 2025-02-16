@@ -13,7 +13,7 @@ export const uploadFileController = baseController(
         config: {
           roles: ["ADMIN", "MEMBER"],
         },
-        preHandler: (req, reply) => validateAnyFile(req, reply), // Validate file before handling request
+        preValidation: (req, reply) => validateAnyFile(req, reply), // Validate file before handling request
         schema: {
           consumes: ["multipart/form-data"], // Required for file upload in Swagger
           body: uploadFileBodyDto,
