@@ -1,5 +1,4 @@
 import fastifyPlugin from "fastify-plugin";
-import dotenv from "dotenv";
 import { z } from "zod";
 
 const zodEnvBooleanTransform = z
@@ -33,9 +32,6 @@ const envSchema = z.object({
 export type configSchema = z.infer<typeof envSchema>;
 
 export const envPlugin = fastifyPlugin(async (fastify, opts) => {
-  // Load .env file
-  dotenv.config();
-
   // Validate environment variables using Zod
   const result = envSchema.safeParse(process.env);
 

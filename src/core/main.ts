@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import Fastify from "fastify";
 import helmet from "@fastify/helmet";
 import FastifyMultipart from "@fastify/multipart";
@@ -49,7 +51,7 @@ async function init() {
       app.log.error(err);
       process.exit(1);
     }
-
+    fastify.log.info(`NODE_ENV=${process.env.NODE_ENV}`);
     fastify.log.info(
       `Swagger endpoint: ${address}${app.config.SWAGGER_DOCS_LINK}`,
     );
