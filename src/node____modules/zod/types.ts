@@ -2724,24 +2724,24 @@ export class ZodObject<
     return new ZodObject({
       ...this._def,
       unknownKeys: "strict",
-      // FIXME: may need fix? or leave it like this
-      // ...(message !== undefined
-      //   ? {
-      //       errorMap: (issue, ctx) => {
-      //         const defaultError =
-      //           this._def.errorMap?.(issue, ctx).message ?? ctx.defaultError;
-      //         if (issue.code === "unrecognized_keys")
-      //           return {
-      //             message:
-      //               (errorUtil.errToObj(message) as any).message ??
-      //               defaultError,
-      //           };
-      //         return {
-      //           message: defaultError,
-      //         };
-      //       },
-      //     }
-      //   : {}
+      // FIXME: maybe ineed to remove this?
+      ...(message !== undefined
+        ? {
+            errorMap: (issue, ctx) => {
+              const defaultError =
+                this._def.errorMap?.(issue, ctx).message ?? ctx.defaultError;
+              if (issue.code === "unrecognized_keys")
+                return {
+                  message:
+                    (errorUtil.errToObj(message) as any).message ??
+                    defaultError,
+                };
+              return {
+                message: defaultError,
+              };
+            },
+          }
+        : {}),
     }) as any;
   }
 
