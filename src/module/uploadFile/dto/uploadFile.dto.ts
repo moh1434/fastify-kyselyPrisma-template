@@ -8,15 +8,20 @@ export const uploadFileBodyDto = z.object({
   }),
 });
 
-export const uploadFileParamsDto = z.object({
+export const uploadFileQueryDto = z.object({
   type: z.enum([
     "profile-client",
     "profile-manager",
     "video-exercise",
     "image-exercise",
   ]),
+  fileName: z
+    .string()
+    .max(50)
+    .regex(/^[^.]*$/) //prevent "." inside the name
+    .optional(),
 });
 
 export type uploadFileBodyDto = z.infer<typeof uploadFileBodyDto>;
 
-export type uploadFileParamsDto = z.infer<typeof uploadFileParamsDto>;
+export type uploadFileQueryDto = z.infer<typeof uploadFileQueryDto>;
