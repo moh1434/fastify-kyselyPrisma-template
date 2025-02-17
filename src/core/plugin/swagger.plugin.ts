@@ -50,7 +50,7 @@ export const swaggerLoadPlugin = fastifyPlugin(async (fastify, opts) => {
       docExpansion: "list",
       deepLinking: false,
       requestInterceptor: (req) => {
-        req.headers["Content-Language"] = "ar";
+        req.headers["content-language"] = "ar";
         return req;
       },
     },
