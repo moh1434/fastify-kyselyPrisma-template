@@ -28,6 +28,7 @@ export const setupI18Plugin = fastifyPlugin(async (fastify, opts) => {
   });
 
   fastify.addHook("onRequest", async (request) => {
+    //note:swagger set headers["Content-Language"]="ar"
     const lang = request.headers["content-language"] || "ar"; // Default to Arabic
     request.t = i18next.getFixedT(lang);
   });
