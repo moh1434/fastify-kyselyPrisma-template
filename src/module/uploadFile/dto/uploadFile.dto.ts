@@ -10,6 +10,7 @@ export const uploadFileBodyDto = z.object({
 
 export const uploadFileQueryDto = z.object({
   type: z.enum([
+    //* you should manually create a directory inside ./uploads for each file type.
     "profile-client",
     "profile-manager",
     "video-exercise",
@@ -18,7 +19,7 @@ export const uploadFileQueryDto = z.object({
   fileName: z
     .string()
     .max(50)
-    .regex(/^[^.]*$/) //prevent "." inside the name
+    // .regex(/^[^.]*$/) //prevent "." inside the name
     .optional(),
 });
 

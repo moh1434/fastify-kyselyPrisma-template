@@ -44,7 +44,7 @@ export const swaggerLoadPlugin = fastifyPlugin(async (fastify, opts) => {
   });
 
   await fastify.register(swaggerUiPlugin, {
-    routePrefix: "/docs",
+    routePrefix: process.env.SWAGGER_DOCS_LINK,
     uiConfig: {
       persistAuthorization: true,
       docExpansion: "list",

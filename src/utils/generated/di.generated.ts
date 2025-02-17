@@ -15,6 +15,7 @@ import getAllExampleQuery from "../../module/example/usecase/queries/getAllExamp
 import getByIdExampleQuery from "../../module/example/usecase/queries/getByIdExample.query.js";
 import { LocalUploadService } from "../../module/uploadFile/service/localUpload.service.js";
 import { S3UploadService } from "../../module/uploadFile/service/s3Upload.service.js";
+import GetFileCommand from "../../module/uploadFile/usecase/commands/getFile.command.js";
 import UploadFileCommand from "../../module/uploadFile/usecase/commands/uploadFile.command.js";
 import UploadFileQuery from "../../module/uploadFile/usecase/queries/uploadFile.query.js";
 
@@ -34,6 +35,7 @@ export interface DiCradle {
   getByIdExampleQuery: getByIdExampleQuery;
   localUploadService: LocalUploadService;
   s3UploadService: S3UploadService;
+  getFileCommand: GetFileCommand;
   uploadFileCommand: UploadFileCommand;
   uploadFileQuery: UploadFileQuery;
   uploadFileService: LocalUploadService;
@@ -55,6 +57,7 @@ export const diList = {
   getByIdExampleQuery: getByIdExampleQuery,
   localUploadService: LocalUploadService,
   s3UploadService: S3UploadService,
+  getFileCommand: GetFileCommand,
   uploadFileCommand: UploadFileCommand,
   uploadFileQuery: UploadFileQuery,
   uploadFileService: LocalUploadService,

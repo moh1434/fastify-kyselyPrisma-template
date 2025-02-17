@@ -29,6 +29,14 @@ export const setupAuthPlugin = fastifyPlugin(async (fastify, opts) => {
       return;
     }
 
+    if (!request?.routeOptions?.config?.roles) {
+      throw APP_ERROR.INTERNAL_SERVER_ERROR(undefined, {
+        message: "request.routeOptions.config is undefined",
+        url: request.url,
+        method: request.method,
+      });
+    }
+
     const tokenPayload = await request.jwtVerify<TokenPayload>();
     if (request.routeOptions.config.roles === "ANY_USER") {
       return;

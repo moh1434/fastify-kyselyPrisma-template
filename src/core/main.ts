@@ -26,7 +26,7 @@ async function init() {
   fastify.register(setupErrorPlugin);
   fastify.register(helmet, { global: true });
 
-  fastify.register(FastifyMultipart);
+  fastify.register(FastifyMultipart, { attachFieldsToBody: true });
   // setup zod
   fastify.setValidatorCompiler(validatorCompiler);
   fastify.setSerializerCompiler(serializerCompiler);

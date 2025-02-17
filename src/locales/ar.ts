@@ -112,6 +112,7 @@ export const arabicTranslation = {
     },
     fields: {
       password: "الرمز السري",
+      email: "البريد الإلكتروني",
     },
     validations: {
       email: "البريد الإلكتروني",

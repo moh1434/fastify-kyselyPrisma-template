@@ -1,48 +1,58 @@
 import { validateAnyFile } from "./dto/filesValidator.js";
 import { baseController } from "../shared/base.controller.js";
-import {
-  uploadFileBodyDto,
-  uploadFileParamsDto,
-} from "./dto/uploadFile.dto.js";
+import { uploadFileBodyDto, uploadFileQueryDto } from "./dto/uploadFile.dto.js";
+import { getFileDto } from "./dto/getFile.dto.js";
 
 export const uploadFileController = baseController(
   async (fastify) => {
     fastify.post(
-      "/file/:type",
+      "/file",
       {
         config: {
           roles: ["ADMIN", "MEMBER"],
         },
-        preValidation: (req, reply) => validateAnyFile(req, reply), // Validate file before handling request
+        preValidation: (request, reply) => validateAnyFile(request, reply), // Validate file before handling request
         schema: {
           consumes: ["multipart/form-data"], // Required for file upload in Swagger
           body: uploadFileBodyDto,
-          params: uploadFileParamsDto,
+          querystring: uploadFileQueryDto,
         },
       },
       async (request, reply) => {
-        const { file } = request.body;
-        const { type } = request.params; // Get the file type from the URL parameter
-        reply.send({
-          message: "File uploaded successfully",
-          filename: "fileLink",
-        });
+        const { link } = await request.diScope.cradle.uploadFileCommand.execute(
+          {
+            file: request.body.file,
+          },
+          request.query,
+        );
+        reply.send({ link });
+        return reply;
       },
     );
     // Stream file download route
     fastify.get(
-      "/download/:link",
+      "/download",
       {
         config: {
-          roles: ["ADMIN", "MEMBER"],
+          roles: "PUBLIC",
+        },
+        schema: {
+          querystring: getFileDto,
         },
       },
-      async (req, reply) => {
-        const { link } = req.params as { link: string };
-        const result = "";
-        //TODO:
-        reply.header("Content-Disposition", `attachment; filename="${link}"`);
-        reply.send(result);
+      async (request, reply) => {
+        reply.header("Content-Type", "application/octet-stream");
+        reply.header(
+          "Content-Disposition",
+          `attachment; filename=${request.query.link}`,
+        );
+
+        reply.send(
+          await request.diScope.cradle.uploadFileService.get(
+            request.query.link,
+          ),
+        );
+        return reply; //important
       },
     );
   },

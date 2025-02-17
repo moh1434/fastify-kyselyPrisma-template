@@ -1,14 +1,14 @@
 import type { ReadStream } from "fs";
 import { type MultipartFile } from "@fastify/multipart";
 export type addFilePayload = {
-  multipartFile: MultipartFile;
+  file: MultipartFile;
   pathSuffix?: string;
   filename?: string;
 };
 export interface uploadFileInterface {
-  add(payload: addFilePayload): Promise<{ newLink: string }>;
+  add(payload: addFilePayload): Promise<{ link: string }>;
   delete(link: string): Promise<void>;
-  get(link: string): Promise<File | ReadStream>;
+  get(link: string): Promise<ReadStream>; //File |
 
   /**
    *1- upload the new file

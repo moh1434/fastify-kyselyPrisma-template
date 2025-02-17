@@ -1,6 +1,7 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { fileTypeFromBuffer } from "file-type";
 import { uploadFileBodyDto } from "./uploadFile.dto.js";
+import { MultipartFile } from "@fastify/multipart";
 
 type AllowedImagesMimeTypes = "image/png" | "image/jpeg" | "image/jpg";
 type AllowedVideosMimeTypes =
@@ -26,12 +27,13 @@ async function baseValidator(
   allowedMimeTypes: AnyAllowedMimeType[],
 ) {
   const MAX_FILE_SIZE = MAX_FILE_SIZE_IN_MB * 1024 * 1024;
+  const file: MultipartFile = (req as any).body.file;
 
-  const file = await req.file();
+  // const file = await req.file();
 
-  if (!file) {
-    return reply.status(400).send({ error: "No file uploaded" });
-  }
+  // if (!file) {
+  //   return reply.status(400).send({ error: "No file uploaded" });
+  // }
 
   // Get actual file size from headers
   const fileSize = Number(file.fields["content-length"] || 0);
@@ -58,10 +60,10 @@ async function baseValidator(
   }
 
   // Attach validated file to request for route handler, zod validation
-  if (!req.body) {
-    req.body = {};
-  }
-  (req.body as uploadFileBodyDto)["file"] = file;
+  // if (!req.body) {
+  //   req.body = {};
+  // }
+  // (req.body as uploadFileBodyDto)["file"] = file;
   return file;
 }
 
