@@ -4,7 +4,7 @@ import {
   addFilePayload,
   uploadFileInterface,
 } from "../interface/uploadFile.interface.js";
-import { APP_ERROR } from "../../../utils/error/predefine-error.js";
+import { APP_ERROR } from "../../../utils/error/appErrors.js";
 import { UPLOAD_DIR } from "../../../utils/rootDirectory.js";
 
 // Ensure the uploads directory exists

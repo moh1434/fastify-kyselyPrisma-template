@@ -1,6 +1,5 @@
 import { CacheType } from "../../../core/plugin/di.plugin.js";
-import { APP_ERROR } from "../../../utils/error/predefine-error.js";
-import { TokenPayload } from "../dto/token.dto.js";
+import { APP_ERROR } from "../../../utils/error/appErrors.js";
 import { JwtWithRefresh } from "../types.js";
 
 export default class BlockTokenService {

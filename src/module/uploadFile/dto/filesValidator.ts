@@ -1,8 +1,10 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { fileTypeFromBuffer } from "file-type";
-import { uploadFileBodyDto } from "./uploadFile.dto.js";
 import { MultipartFile } from "@fastify/multipart";
+import { APP_ERROR } from "../../../utils/error/appErrors.js";
 
+const defaultMaxFileSizeInMB = 10;
+const defaultMaxVideoSizeInMb = 25;
 type AllowedImagesMimeTypes = "image/png" | "image/jpeg" | "image/jpg";
 type AllowedVideosMimeTypes =
   | "video/quicktime"
@@ -23,54 +25,40 @@ type AnyAllowedMimeType =
 async function baseValidator(
   req: FastifyRequest,
   reply: FastifyReply,
-  MAX_FILE_SIZE_IN_MB = 5,
+  MAX_FILE_SIZE_IN_MB: number,
   allowedMimeTypes: AnyAllowedMimeType[],
 ) {
   const MAX_FILE_SIZE = MAX_FILE_SIZE_IN_MB * 1024 * 1024;
   const file: MultipartFile = (req as any).body.file;
 
-  // const file = await req.file();
-
-  // if (!file) {
-  //   return reply.status(400).send({ error: "No file uploaded" });
-  // }
-
   // Get actual file size from headers
-  const fileSize = Number(file.fields["content-length"] || 0);
-
-  // Check file size
-  if (fileSize > MAX_FILE_SIZE) {
-    return reply.status(400).send({
-      error: `File too large (max ${MAX_FILE_SIZE}MB)`,
+  const fileSize = file.file.bytesRead;
+  if (fileSize > MAX_FILE_SIZE || file.file.truncated) {
+    throw APP_ERROR.BAD_REQUEST(undefined, {
+      i18Key: "error.file.too_large",
+      maxSize: `${MAX_FILE_SIZE_IN_MB}MB`,
     });
   }
-  if (file.file.truncated) {
-    return reply
-      .status(400)
-      .send({ error: "File too large (truncated by Fastify global limit)" });
-  }
-  //
-
   // Detect actual file type
   const detectedType = await fileTypeFromBuffer(await file.toBuffer());
   if (!detectedType || !allowedMimeTypes.includes(detectedType.mime as any)) {
-    return reply
-      .status(400)
-      .send({ error: "Invalid file type (mismatched content)" });
+    throw APP_ERROR.BAD_REQUEST(
+      {
+        allowedMimeTypes,
+      },
+      {
+        i18Key: "error.file.invalid_type",
+      },
+    );
   }
 
-  // Attach validated file to request for route handler, zod validation
-  // if (!req.body) {
-  //   req.body = {};
-  // }
-  // (req.body as uploadFileBodyDto)["file"] = file;
   return file;
 }
 
 export async function validateAnyFile(
   req: FastifyRequest,
   reply: FastifyReply,
-  MAX_FILE_SIZE_IN_MB = 5,
+  MAX_FILE_SIZE_IN_MB = defaultMaxFileSizeInMB,
   allowedMimeTypes: AnyAllowedMimeType[] = [
     "image/png",
     "image/jpeg",
@@ -92,7 +80,7 @@ export async function validateAnyFile(
 export async function validateImage(
   req: FastifyRequest,
   reply: FastifyReply,
-  MAX_FILE_SIZE_IN_MB = 5,
+  MAX_FILE_SIZE_IN_MB = defaultMaxFileSizeInMB,
   allowedMimeTypes: AllowedImagesMimeTypes[] = [
     "image/png",
     "image/jpeg",
@@ -105,7 +93,7 @@ export async function validateImage(
 export async function validateVideo(
   req: FastifyRequest,
   reply: FastifyReply,
-  MAX_FILE_SIZE_IN_MB = 5,
+  MAX_FILE_SIZE_IN_MB = defaultMaxVideoSizeInMb,
   allowedMimeTypes: AllowedVideosMimeTypes[] = [
     "video/quicktime",
     "video/x-m4v",
@@ -119,7 +107,7 @@ export async function validateVideo(
 export async function validateExcel(
   req: FastifyRequest,
   reply: FastifyReply,
-  MAX_FILE_SIZE_IN_MB = 5,
+  MAX_FILE_SIZE_IN_MB = defaultMaxFileSizeInMB,
   allowedMimeTypes: ExcelMimeType[] = [
     "application/vnd.ms-excel",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -131,7 +119,7 @@ export async function validateExcel(
 export async function validatePDF(
   req: FastifyRequest,
   reply: FastifyReply,
-  MAX_FILE_SIZE_IN_MB = 5,
+  MAX_FILE_SIZE_IN_MB = defaultMaxFileSizeInMB,
   allowedMimeTypes: PdfMimeType[] = ["application/pdf"],
 ) {
   return await baseValidator(req, reply, MAX_FILE_SIZE_IN_MB, allowedMimeTypes);

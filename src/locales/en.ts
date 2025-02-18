@@ -16,6 +16,10 @@ export const englishTranslation = {
       wrongPassword: "password or phone is wrong",
       noLogin: "you need to login first",
     },
+    file: {
+      too_large: "حجم الملف كبير, الحجم الاقصى {{maxSize}}",
+      invalid_type: "نوع الملف غير مقبول",
+    },
   },
   zod: {
     custom: {
@@ -113,6 +117,8 @@ export const englishTranslation = {
     },
     fields: {
       password: "password",
+      email: "email",
+      phone: "phone",
     },
     validations: {
       email: "email",

@@ -1,6 +1,6 @@
 import { loginDto } from "../../dto/login.dto.js";
 import { PasswordService } from "../../service/password.service.js";
-import { APP_ERROR } from "../../../../utils/error/predefine-error.js";
+import { APP_ERROR } from "../../../../utils/error/appErrors.js";
 import { configSchema } from "../../../../core/plugin/env.plugin.js";
 import GetUserByPhone from "../queries/getUserByPhone.query.js";
 import { GenerateTokensService } from "../../service/generateTokens.service.js";

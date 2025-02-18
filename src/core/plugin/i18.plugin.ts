@@ -1,6 +1,5 @@
 import fastifyPlugin from "fastify-plugin";
-import i18next from "i18next";
-
+import i18next, { ParseKeys } from "i18next";
 import { arabicTranslation } from "../../locales/ar.js";
 import { englishTranslation } from "../../locales/en.js";
 import { z } from "zod";
@@ -35,3 +34,8 @@ export const setupI18Plugin = fastifyPlugin(async (fastify, opts) => {
 
   z.setErrorMap(zodI18nMap);
 });
+
+//Alias for the first parameter of t()
+//const key :tKey ="error.http.badRequest"    OK
+//const key :tKey ="error.http.badRequest"    ERROR
+export type tKey = ParseKeys;

@@ -1,5 +1,5 @@
 import { User } from "../../../../db/types.js";
-import { APP_ERROR } from "../../../../utils/error/predefine-error.js";
+import { APP_ERROR } from "../../../../utils/error/appErrors.js";
 import { DbType, KyselyDB } from "../../../../utils/type/kysely.js";
 
 export default class GetUserByPhone {

@@ -1,14 +1,7 @@
 import fastifyPlugin from "fastify-plugin";
 import fastifyJWT from "@fastify/jwt";
 import { TokenPayload } from "./dto/token.dto.js";
-import { APP_ERROR } from "../../utils/error/predefine-error.js";
-// import fastifyPassport from "@fastify/passport";
-
-// import {
-//   Strategy as JwtStrategy,
-//   ExtractJwt,
-//   StrategyOptionsWithoutRequest,
-// } from "passport-jwt";
+import { APP_ERROR } from "../../utils/error/appErrors.js";
 
 export const setupAuthPlugin = fastifyPlugin(async (fastify, opts) => {
   fastify.register(fastifyJWT, {
@@ -23,18 +16,22 @@ export const setupAuthPlugin = fastifyPlugin(async (fastify, opts) => {
     // Skip public routes
     if (
       request.routeOptions.config.roles === "PUBLIC" ||
-      // Skip routes that start with /doc which is swagger
+      // Skip routes that start with /docs (swagger)
       request.url.startsWith(fastify.config.SWAGGER_DOCS_LINK)
     ) {
       return;
     }
 
     if (!request?.routeOptions?.config?.roles) {
-      throw APP_ERROR.INTERNAL_SERVER_ERROR(undefined, {
-        message: "request.routeOptions.config is undefined",
-        url: request.url,
-        method: request.method,
-      });
+      throw APP_ERROR.INTERNAL_SERVER_ERROR(
+        {
+          directMessage: "request.routeOptions.config is undefined",
+        },
+        {
+          url: request.url,
+          method: request.method,
+        },
+      );
     }
 
     const tokenPayload = await request.jwtVerify<TokenPayload>();

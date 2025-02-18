@@ -13,14 +13,18 @@ export const arabicTranslation = {
     },
     unauthorized: {
       wrongPassword: "كلمة السر او رقم الهاتف غير صحيح",
-      noLogin: "لم تقم بستجيل الدخول",
+      noLogin: "خطأ بستجيل الدخول",
+    },
+    file: {
+      too_large: "حجم الملف كبير, الحجم الاقصى {{maxSize}}",
+      invalid_type: "نوع الملف غير مقبول",
     },
   },
   zod: {
     custom: {
       custom: "مدخل غير صالح",
       invalid_pagination_input:
-        "invalid pagination input, use one of (skip/take) or (page/perPage), not both",
+        "طريقة تقسيم الصفحات غير صالحة, استعمل اما (skip/take) او (page/perPage), وليس كلاهما",
       invalid_phone_number:
         "رقم الهاتف يجب ان يحتوي على ١٠ ارقام ويبدأ ب ٠ او +٩٦٤",
       invalid_password: "الرمز السري يجب ان يحتوي على ٨ حروف",
@@ -113,6 +117,7 @@ export const arabicTranslation = {
     fields: {
       password: "الرمز السري",
       email: "البريد الإلكتروني",
+      phone: "رقم الهاتف",
     },
     validations: {
       email: "البريد الإلكتروني",
