@@ -5,13 +5,13 @@ import {
 } from "../interface/uploadFile.interface.js";
 
 export class S3UploadService implements uploadFileInterface {
-  add(payload: addFilePayload): Promise<{ newLink: string }> {
+  add(payload: addFilePayload): Promise<{ link: string }> {
     throw new Error("Method not implemented.");
   }
   delete(link: string): Promise<void> {
     throw new Error("Method not implemented.");
   }
-  get(link: string): Promise<File | ReadStream> {
+  get(link: string): Promise<ReadStream> {
     throw new Error("Method not implemented.");
   }
   replace(
