@@ -1,14 +1,17 @@
 import { TokenCreatePayload } from "../dto/token.dto.js";
 import { JwtWithRefresh } from "../types.js";
 import { configSchema } from "../../../core/plugin/env.plugin.js";
+import { CacheType } from "../../../core/plugin/di.plugin.js";
+import { APP_ERROR } from "../../../utils/error/appErrors.js";
 
-export class GenerateTokensService {
+export class TokenService {
   constructor(
     private jwt: JwtWithRefresh,
     private config: configSchema,
+    private cache: CacheType,
   ) {}
 
-  execute(user: TokenCreatePayload) {
+  generate(user: TokenCreatePayload) {
     const payload: TokenCreatePayload = {
       id: user.id,
       phone: user.phone,
@@ -29,5 +32,17 @@ export class GenerateTokensService {
         refreshToken,
       },
     };
+  }
+  async throwIfBlocked(token: string) {
+    const isBlocked = await this.cache.get<boolean>(`block:${token}`);
+
+    if (isBlocked) {
+      throw APP_ERROR.UNAUTHORIZED();
+    }
+  }
+  async makeBlock(token: string, exp: number) {
+    const expiresIn = exp * 1000 - Date.now();
+
+    await this.cache.set<boolean>(`block:${token}`, true, expiresIn);
   }
 }

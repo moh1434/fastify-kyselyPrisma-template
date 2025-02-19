@@ -1,8 +1,7 @@
 // Auto-generated DI type
 
-import BlockTokenService from "../../module/auth/service/blockToken.service.js";
-import { GenerateTokensService } from "../../module/auth/service/generateTokens.service.js";
 import { PasswordService } from "../../module/auth/service/password.service.js";
+import { TokenService } from "../../module/auth/service/token.service.js";
 import LoginCommand from "../../module/auth/usecase/commands/login.command.js";
 import RefreshTokenCommand from "../../module/auth/usecase/commands/refreshToken.command.js";
 import ResetPasswordCommand from "../../module/auth/usecase/commands/resetPassword.command.js";
@@ -20,9 +19,8 @@ import UploadFileCommand from "../../module/uploadFile/usecase/commands/uploadFi
 import UploadFileQuery from "../../module/uploadFile/usecase/queries/uploadFile.query.js";
 
 export interface DiCradle {
-  blockTokenService: BlockTokenService;
-  generateTokensService: GenerateTokensService;
   passwordService: PasswordService;
+  tokenService: TokenService;
   loginCommand: LoginCommand;
   refreshTokenCommand: RefreshTokenCommand;
   resetPasswordCommand: ResetPasswordCommand;
@@ -42,9 +40,8 @@ export interface DiCradle {
 }
 
 export const diList = {
-  blockTokenService: BlockTokenService,
-  generateTokensService: GenerateTokensService,
   passwordService: PasswordService,
+  tokenService: TokenService,
   loginCommand: LoginCommand,
   refreshTokenCommand: RefreshTokenCommand,
   resetPasswordCommand: ResetPasswordCommand,

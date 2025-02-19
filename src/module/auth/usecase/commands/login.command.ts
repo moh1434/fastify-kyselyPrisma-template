@@ -3,7 +3,7 @@ import { PasswordService } from "../../service/password.service.js";
 import { APP_ERROR } from "../../../../utils/error/appErrors.js";
 import { configSchema } from "../../../../core/plugin/env.plugin.js";
 import GetUserByPhone from "../queries/getUserByPhone.query.js";
-import { GenerateTokensService } from "../../service/generateTokens.service.js";
+import { TokenService } from "../../service/token.service.js";
 import { KyselyDB } from "../../../../utils/type/kysely.js";
 
 export default class LoginCommand {
@@ -12,7 +12,7 @@ export default class LoginCommand {
     private config: configSchema,
     private passwordService: PasswordService,
     private getUserByPhone: GetUserByPhone,
-    private generateTokensService: GenerateTokensService,
+    private tokenService: TokenService,
   ) {}
 
   async execute(dto: loginDto) {
@@ -26,6 +26,6 @@ export default class LoginCommand {
     if (!isMatch) {
       throw APP_ERROR.WRONG_PASSWORD({ resource: "password" });
     }
-    return this.generateTokensService.execute(user);
+    return this.tokenService.generate(user);
   }
 }

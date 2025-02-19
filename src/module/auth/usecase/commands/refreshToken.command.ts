@@ -1,28 +1,26 @@
 import { TokenPayload } from "../../dto/token.dto.js";
 import { JwtWithRefresh } from "../../types.js";
 import GetUserById from "../queries/getUserById.query.js";
-import { GenerateTokensService } from "../../service/generateTokens.service.js";
-import BlockTokenService from "../../service/blockToken.service.js";
+import { TokenService } from "../../service/token.service.js";
 
 export default class RefreshTokenCommand {
   constructor(
     private jwt: JwtWithRefresh,
     private getUserById: GetUserById,
-    private generateTokensService: GenerateTokensService,
-    private blockTokenService: BlockTokenService,
+    private tokenService: TokenService,
   ) {}
 
   async execute(refreshToken: string) {
     refreshToken = refreshToken.replace(/^Bearer\s+/, "");
 
-    await this.blockTokenService.throwIfBlocked(refreshToken);
+    await this.tokenService.throwIfBlocked(refreshToken);
 
     const payload = this.jwt.refresh.verify<TokenPayload>(refreshToken);
 
     const user = await this.getUserById.execute(payload.id);
 
-    await this.blockTokenService.makeBlock(refreshToken, payload.exp);
+    await this.tokenService.makeBlock(refreshToken, payload.exp);
 
-    return this.generateTokensService.execute(user);
+    return this.tokenService.generate(user);
   }
 }
