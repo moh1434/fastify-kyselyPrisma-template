@@ -1,5 +1,6 @@
 import fastifyPlugin from "fastify-plugin";
 import { z } from "zod";
+import dotenv from "dotenv";
 
 const zodEnvBooleanTransform = z
   .enum(["1", "0"])
@@ -40,7 +41,17 @@ export const envPlugin = fastifyPlugin(async (fastify, opts) => {
     console.error("Invalid environment variables:", result.error.errors);
     throw new Error("Environment validation failed");
   }
-
+  console.log(result.data);
   // Expose validated and type-safe env
   fastify.decorate("config", result.data);
 });
+
+export function registerDotEnv() {
+  const envFile =
+    process.env.NODE_ENV === "production"
+      ? ".env.prod"
+      : process.env.NODE_ENV === "test"
+        ? ".env.test"
+        : ".env";
+  dotenv.config({ path: envFile });
+}

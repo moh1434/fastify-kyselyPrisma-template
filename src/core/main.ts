@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-dotenv.config();
+import { envPlugin, registerDotEnv } from "./plugin/env.plugin.js";
+registerDotEnv();
 import Fastify from "fastify";
 import helmet from "@fastify/helmet";
 import FastifyMultipart from "@fastify/multipart";
@@ -8,7 +8,6 @@ import {
   validatorCompiler,
   ZodTypeProvider,
 } from "fastify-type-provider-zod";
-import { envPlugin } from "./plugin/env.plugin.js";
 
 import { setupControllersPlugin } from "./plugin/controller.plugin.js";
 import { swaggerLoadPlugin } from "./plugin/swagger.plugin.js";
