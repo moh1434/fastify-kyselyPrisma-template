@@ -41,7 +41,7 @@ export const envPlugin = fastifyPlugin(async (fastify, opts) => {
     console.error("Invalid environment variables:", result.error.errors);
     throw new Error("Environment validation failed");
   }
-  console.log(result.data);
+
   // Expose validated and type-safe env
   fastify.decorate("config", result.data);
 });
