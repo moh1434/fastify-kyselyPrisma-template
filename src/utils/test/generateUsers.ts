@@ -4,7 +4,7 @@ import { getImageUrl } from "./generateImageUrl.js";
 import { generateName } from "./generateNames.js";
 import { getPhone } from "./generatePhones.js";
 
-import { getId } from "./getIds.js";
+import { getId } from "./generateUUIDs.js";
 
 const now = new Date();
 
