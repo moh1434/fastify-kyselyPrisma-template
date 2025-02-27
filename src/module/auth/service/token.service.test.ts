@@ -1,4 +1,4 @@
-//override .env.test file only for this test
+//set custom .env.test values for this file
 process.env.JWT_SECRET_KEY = "custom_access_secret_test";
 process.env.JWT_EXPIRES = "5s";
 process.env.JWT_REFRESH_SECRET_KEY = "custom_refresh_secret_test";
