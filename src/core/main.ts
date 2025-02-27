@@ -44,6 +44,9 @@ async function init() {
   app.register(setupControllersPlugin);
 
   await app.ready();
+  if (process.env.NODE_ENV === "test") {
+    return app;
+  }
   // Run the server!
   app.listen({ port: app.config.PORT }, function (err, address) {
     if (err) {
@@ -64,4 +67,4 @@ async function init() {
   });
 }
 
-await init();
+export const fastify = await init();
