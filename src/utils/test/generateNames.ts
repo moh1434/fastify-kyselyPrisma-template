@@ -26,7 +26,7 @@ const names = Object.freeze(
 );
 type name = (typeof names)[number];
 
-export function generateName(): string {
+export function getName(): string {
   if (index >= names.length) {
     index = 0;
     iterations++;
