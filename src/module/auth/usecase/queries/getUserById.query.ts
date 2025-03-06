@@ -1,7 +1,7 @@
 import { APP_ERROR } from "../../../../utils/error/appErrors.js";
 import { KyselyDB } from "../../../../utils/type/kysely.js";
 
-export default class GetUserById {
+export default class GetUserByIdQuery {
   constructor(private db: KyselyDB) {}
   async execute(userId: string) {
     const user = await this.db

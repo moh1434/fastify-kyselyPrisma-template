@@ -53,3 +53,12 @@ useful links about the about Command Query Separation(CQS):
 1) https://khalilstemmler.com/articles/oop-design-principles/command-query-separation/
 2) https://khalilstemmler.com/articles/enterprise-typescript-nodejs/application-layer-use-cases/
 </pre>
+
+
+<br />
+<br />
+<pre>
+note:
+when you execute <code>pnpm run test</code>, this file <code>vitestSetupFiles.ts</code> will run once before each test file
+</pre>
+<br />

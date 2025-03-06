@@ -10,14 +10,16 @@ export class TokenService {
     private config: configSchema,
     private cache: CacheType,
   ) {}
-
-  generate(user: TokenCreatePayload) {
-    const payload: TokenCreatePayload = {
+  getTokenPayload(user: any): TokenCreatePayload {
+    return {
       id: user.id,
       phone: user.phone,
       verifiedPhone: user.verifiedPhone,
       role: user.role,
     };
+  }
+  generate(user: TokenCreatePayload) {
+    const payload: TokenCreatePayload = this.getTokenPayload(user);
 
     const accessToken = this.jwt.sign(payload, {
       expiresIn: this.config.JWT_EXPIRES,

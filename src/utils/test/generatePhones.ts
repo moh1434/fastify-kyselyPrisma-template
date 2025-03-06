@@ -6,20 +6,17 @@ const phones = {
   korek: "+9647550000000",
 };
 
-export function getZainPhone() {
-  phones.zain = phoneSummation(phones.zain);
-  return phones.zain;
+export function getZainPhone(increaseBy = 0) {
+  return phoneSummation(phones.zain, increaseBy);
 }
 export const getPhone = getZainPhone;
 
-export function getAsiaPhone() {
-  phones.asia = phoneSummation(phones.asia);
-  return phones.asia;
+export function getAsiaPhone(increaseBy = 0) {
+  return phoneSummation(phones.asia, increaseBy);
 }
 
-export function getKorekPhone() {
-  phones.korek = phoneSummation(phones.korek);
-  return phones.korek;
+export function getKorekPhone(increaseBy = 0) {
+  return phoneSummation(phones.korek, increaseBy);
 }
 
 //

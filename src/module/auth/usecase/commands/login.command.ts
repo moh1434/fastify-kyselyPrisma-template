@@ -2,7 +2,7 @@ import { loginDto } from "../../dto/login.dto.js";
 import { PasswordService } from "../../service/password.service.js";
 import { APP_ERROR } from "../../../../utils/error/appErrors.js";
 import { configSchema } from "../../../../core/plugin/env.plugin.js";
-import GetUserByPhone from "../queries/getUserByPhone.query.js";
+import GetUserByPhoneQuery from "../queries/getUserByPhone.query.js";
 import { TokenService } from "../../service/token.service.js";
 import { KyselyDB } from "../../../../utils/type/kysely.js";
 
@@ -11,12 +11,12 @@ export default class LoginCommand {
     private db: KyselyDB,
     private config: configSchema,
     private passwordService: PasswordService,
-    private getUserByPhone: GetUserByPhone,
+    private getUserByPhoneQuery: GetUserByPhoneQuery,
     private tokenService: TokenService,
   ) {}
 
   async execute(dto: loginDto) {
-    const user = await this.getUserByPhone.execute(dto.phone);
+    const user = await this.getUserByPhoneQuery.execute(dto.phone);
 
     const isMatch = await this.passwordService.verify(
       dto.password,

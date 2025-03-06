@@ -10,7 +10,6 @@ import { TokenService } from "../service/token.service.js";
 import { TokenCreatePayload } from "../dto/token.dto.js";
 import { JwtWithRefresh } from "../types.js";
 import { APP_ERROR } from "../../../utils/error/appErrors.js";
-import { generateUser } from "../../../utils/test/generateUsers.js";
 
 describe("TokenService", () => {
   let tokenService: TokenService;
@@ -26,14 +25,8 @@ describe("TokenService", () => {
   };
 
   beforeAll(async () => {
-    if (!fastify) {
-      throw new Error("Fastify is undefined");
-    }
-    await fastify.ready(); // Ensure Fastify is fully initialized
-
-    console.log("token.service.test:", generateUser());
-    tokenService = fastify.diContainer.cradle.tokenService;
-    jwt = fastify.diContainer.cradle.jwt;
+    tokenService = fastify!.diContainer.cradle.tokenService;
+    jwt = fastify!.diContainer.cradle.jwt;
   });
 
   beforeEach(() => {
@@ -62,8 +55,8 @@ describe("TokenService", () => {
       Math.floor(Date.now() / 1000) + 3600, // Expiration time 1 hour later
     );
 
-    await expect(tokenService.throwIfBlocked(accessToken)).rejects.toThrow(
-      (APP_ERROR as any).UNAUTHORIZED(),
-    );
+    await expect(
+      tokenService.throwIfBlocked(accessToken),
+    ).rejects.toMatchObject(APP_ERROR.UNAUTHORIZED());
   });
 });

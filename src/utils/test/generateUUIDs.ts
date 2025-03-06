@@ -157,14 +157,16 @@ type Result<T extends string> = {
 } & {
   [key in `${T}Index`]: number;
 };
-let index = 0;
 
 /**
  * generate static uuid v4
  * @example
  * const { user1Id } = getNamedId("user1");
  */
-export function getNamedId<T extends string>(baseName: T): Result<T> {
+export function getNamedId<T extends string>(
+  baseName: T,
+  index = 0,
+): Result<T> {
   const result = {
     [baseName + "Id"]: _uuids[index],
     [baseName + "Index"]: index,
@@ -178,7 +180,7 @@ export function getNamedId<T extends string>(baseName: T): Result<T> {
   return result;
 }
 
-export function getId() {
+export function getId(index = 0) {
   const result = _uuids[index];
 
   if (!result) {

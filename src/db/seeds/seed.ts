@@ -1,7 +1,6 @@
 import type { Kysely } from "kysely";
 import { DB } from "../../db/types.js";
 import { seedUsers } from "../data/usersSeedPayload.js";
-import { JsonStringify } from "../../utils/helpers/stringify.js";
 
 export async function seed(db: Kysely<DB>): Promise<void> {
   try {

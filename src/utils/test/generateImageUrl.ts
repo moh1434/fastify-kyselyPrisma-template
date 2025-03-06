@@ -16,8 +16,7 @@ const links: Readonly<string[]> = [
   "https://placehold.co/100x100/9E9E9E/FFFFFF/png",
 ];
 
-let index = 0;
-export function getImageUrl(): string {
+export function getImageUrl(index = 0): string {
   if (index >= links.length) {
     index = 0;
   }

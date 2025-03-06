@@ -6,26 +6,32 @@ import { getName } from "./generateNames.js";
 import { getPhone } from "./generatePhones.js";
 
 import { getId } from "./generateUUIDs.js";
-
-const now = new Date();
+const index = { id: 0, phone: 0, fullName: 0, email: 0, image: 0 };
+const date = new Date("2025-01-06T08:11:11.111Z");
 
 // "testTest",
-const defaultPassword =
+export const defaultTestPassword =
   "$argon2id$v=19$m=65536,t=3,p=4$Oo22R0fT3S4c+HbbRvR3vg$Mu6N5WrZVHV6gdKauW/BvZoUbjaD0TjO0lG8HOwlGkU";
 export function generateUser(custom?: Partial<DbType<User>>): DbType<User> {
   return {
     role: custom?.role === undefined ? "MEMBER" : custom?.role,
-    id: custom?.id === undefined ? getId() : custom?.id,
-    phone: custom?.phone === undefined ? getPhone() : custom?.phone,
-    fullName: custom?.fullName === undefined ? getName() : custom?.fullName,
+    id: custom?.id === undefined ? getId(index.id++) : custom?.id,
+    phone:
+      custom?.phone === undefined ? getPhone(index.phone++) : custom?.phone,
+    fullName:
+      custom?.fullName === undefined
+        ? getName(index.fullName++)
+        : custom?.fullName,
     password:
-      custom?.password === undefined ? defaultPassword : custom?.password,
-    email: custom?.email === undefined ? getEmail() : custom?.email,
-    image: custom?.image === undefined ? getImageUrl() : custom?.image,
+      custom?.password === undefined ? defaultTestPassword : custom?.password,
+    email:
+      custom?.email === undefined ? getEmail(index.email++) : custom?.email,
+    image:
+      custom?.image === undefined ? getImageUrl(index.image++) : custom?.image,
     verifiedPhone:
       custom?.verifiedPhone === undefined ? true : custom?.verifiedPhone,
-    createdAt: custom?.createdAt === undefined ? now : custom?.createdAt,
-    updatedAt: custom?.updatedAt === undefined ? now : custom?.updatedAt,
+    createdAt: custom?.createdAt === undefined ? date : custom?.createdAt,
+    updatedAt: custom?.updatedAt === undefined ? date : custom?.updatedAt,
     deletedAt: custom?.deletedAt === undefined ? null : custom?.deletedAt,
   };
 }

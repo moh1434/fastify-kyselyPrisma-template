@@ -26,15 +26,15 @@ const names = Object.freeze(
 );
 type name = (typeof names)[number];
 
-export function getName(): string {
+export function getName(index = 0, iterations = 0): string {
   if (index >= names.length) {
     index = 0;
     iterations++;
   }
   const theName = names[index++];
   if (iterations) {
-    theName.thirdName = theName.thirdName + iterations;
-    theName.fullName = theName.fullName + iterations;
+    theName.thirdName = theName.thirdName + (iterations || "");
+    theName.fullName = theName.fullName + (iterations || "");
   }
   return theName.fullName;
 }

@@ -1,4 +1,3 @@
-let index = 0;
-export function getEmail(): string {
+export function getEmail(index = 0): string {
   return `test${index++}@gmail.com`;
 }
