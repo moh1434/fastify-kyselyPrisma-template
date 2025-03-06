@@ -4,7 +4,7 @@
 <pre>
 if <code> ts-node ./myFile.ts </code> does not work for, you can do this:
 1) write: <code> nano ~/.bash_profile </code> inside the terminal
-2) write: <code> alias esm-node="node --no-warnings --loader ts-node/esm" </code>
+2) write: <code> alias esm-node="node --no-warnings --loader ts-node/esm" </code>, save and exit
 3) write: <code> nano ~/.zshrc </code> inside the terminal
 4) write: <code> alias esm-node="node --no-warnings --loader ts-node/esm" </code>
 5) reload the terminal
