@@ -1,8 +1,8 @@
-//set custom .env.test values for this file
-process.env.JWT_SECRET_KEY = "custom_access_secret_test";
-process.env.JWT_EXPIRES = "5s";
-process.env.JWT_REFRESH_SECRET_KEY = "custom_refresh_secret_test";
-process.env.JWT_REFRESH_EXPIRES = "10s";
+// //set custom .env.test values for this file 1/2
+// process.env.JWT_SECRET_KEY = "custom_access_secret_test";
+// process.env.JWT_EXPIRES = "5s";
+// process.env.JWT_REFRESH_SECRET_KEY = "custom_refresh_secret_test";
+// process.env.JWT_REFRESH_EXPIRES = "10s";
 
 import { describe, it, expect, beforeAll, beforeEach } from "vitest";
 import { fastify } from "../../../core/main.js";

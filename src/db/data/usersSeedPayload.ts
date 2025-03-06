@@ -2,7 +2,7 @@ import { generateUser } from "../../utils/test/generateUsers.js";
 
 const now = new Date();
 //automatically created by seed.ts
-export const seedUsers = Object.freeze({
+export const usersForSeed = Object.freeze({
   member: {
     normal: [
       generateUser(),

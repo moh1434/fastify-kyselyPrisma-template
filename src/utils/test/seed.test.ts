@@ -6,7 +6,7 @@ process.env.JWT_REFRESH_EXPIRES = "10s";
 
 import { describe, it, expect, beforeAll, beforeEach } from "vitest";
 import { fastify } from "../../core/main.js";
-import { seedUsers } from "../../db/data/usersSeedPayload.js";
+import { usersForSeed } from "../../db/data/usersSeedPayload.js";
 import { KyselyDB } from "../type/kysely.js";
 
 describe("Seed Seed Seed.test.ts", () => {
@@ -19,10 +19,10 @@ describe("Seed Seed Seed.test.ts", () => {
   it("should get the same seed user from the DB", async () => {
     const seededUser = await db
       .selectFrom("User")
-      .where("User.phone", "=", seedUsers.member.normal[0].phone)
+      .where("User.phone", "=", usersForSeed.member.normal[0].phone)
       .selectAll()
       .executeTakeFirst();
 
-    expect(seededUser).toEqual(seedUsers.member.normal[0]);
+    expect(seededUser).toEqual(usersForSeed.member.normal[0]);
   });
 });

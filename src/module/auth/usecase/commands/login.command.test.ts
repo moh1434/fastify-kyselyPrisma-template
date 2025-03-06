@@ -10,7 +10,7 @@ import LoginCommand from "./login.command.js";
 import { fastify } from "../../../../core/main.js";
 import { User } from "../../../../db/types.js";
 import { defaultTestPassword } from "../../../../utils/test/generateUsers.js";
-import { seedUsers } from "../../../../db/data/usersSeedPayload.js";
+import { usersForSeed } from "../../../../db/data/usersSeedPayload.js";
 import { spyAllMethods } from "../../../../utils/test/spyAllMethods.js";
 
 describe("LoginCommand", () => {
@@ -41,7 +41,7 @@ describe("LoginCommand", () => {
   //i want to only test the
   it("should return a token when login is successful", async () => {
     const dto = {
-      phone: seedUsers.member.normal[0].phone,
+      phone: usersForSeed.member.normal[0].phone,
       password: "testTest",
     };
 
@@ -50,10 +50,10 @@ describe("LoginCommand", () => {
     expect(getUserByPhoneQuery.execute).toHaveBeenCalledWith(dto.phone);
     expect(passwordService.verify).toHaveBeenCalledWith(
       dto.password,
-      seedUsers.member.normal[0].password,
+      usersForSeed.member.normal[0].password,
     );
     expect(tokenService.generate).toHaveBeenCalledWith(
-      seedUsers.member.normal[0],
+      usersForSeed.member.normal[0],
     );
 
     const jwtRegex = /^[A-Za-z0-9-_]+?\.[A-Za-z0-9-_]+?\.[A-Za-z0-9-_]+?$/;
@@ -63,7 +63,7 @@ describe("LoginCommand", () => {
 
   it("should throw an error when the password is incorrect", async () => {
     const dto = {
-      phone: seedUsers.member.normal[1].phone,
+      phone: usersForSeed.member.normal[1].phone,
       password: "wrong_password",
     };
     expect(loginCommand.execute(dto)).rejects.toMatchObject(

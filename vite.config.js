@@ -6,9 +6,9 @@ export default defineConfig({
   test: {
     fileParallelism: false,
     isolate: false, // This ensures all tests share the same module instance
-    // setupFiles: "./src/utils/type/index.ts",
     globals: true, // Enables global variables like globalThis
-    setupFiles: ["src/utils/test/vitestSetupFiles.ts"],
+    // setupFiles: ["src/utils/test/vitestSetupFiles.ts"],
+    globalSetup: ["src/utils/test/vitestGlobalFiles.ts"],
     watch: false,
   },
 });
