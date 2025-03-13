@@ -6,9 +6,9 @@ export const englishTranslation = {
       forbidden:
         "your role is {{current_role}}, but you need one of these roles {{accepted_roles}}}",
 
-      notFound: "{{resource}} not found ",
+      notFound: "{{resource}} not found",
       requestTimeout: "time out",
-      conflict: "{{resource}} already exists",
+      conflict: "already exists",
       internalServerError: "internal server error",
       badGateway: "bad gateway",
     },
@@ -29,6 +29,7 @@ export const englishTranslation = {
       invalid_phone_number:
         "phone number should include (10) digits and starts with (0) or (+964)",
       invalid_password: "ENالرمز السري يجب ان يحتوي على ٨ حروف",
+      invalid_confirmation_password: "invalid confirmation password",
     },
     errors: {
       invalid_type: "Expected {{expected}}, received {{received}}",

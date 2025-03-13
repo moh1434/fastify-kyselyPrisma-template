@@ -4,10 +4,12 @@ import { PasswordService } from "../../module/auth/service/password.service.js";
 import { TokenService } from "../../module/auth/service/token.service.js";
 import LoginCommand from "../../module/auth/usecase/commands/login.command.js";
 import RefreshTokenCommand from "../../module/auth/usecase/commands/refreshToken.command.js";
+import RegisterUserCommand from "../../module/auth/usecase/commands/registerUser.command.js";
 import ResetPasswordCommand from "../../module/auth/usecase/commands/resetPassword.command.js";
 import VerifyEmailCommand from "../../module/auth/usecase/commands/verifyEmail.command.js";
 import GetUserByIdQuery from "../../module/auth/usecase/queries/getUserById.query.js";
 import GetUserByPhoneQuery from "../../module/auth/usecase/queries/getUserByPhone.query.js";
+import GetUserIdIfExistsQuery from "../../module/auth/usecase/queries/getUserIdIfExists.query.js";
 import { ExampleService } from "../../module/example/service/example.service.js";
 import ExampleCommand from "../../module/example/usecase/commands/example.command.js";
 import getAllExampleQuery from "../../module/example/usecase/queries/getAllExample.query.js";
@@ -23,10 +25,12 @@ export interface DiCradle {
   tokenService: TokenService;
   loginCommand: LoginCommand;
   refreshTokenCommand: RefreshTokenCommand;
+  registerUserCommand: RegisterUserCommand;
   resetPasswordCommand: ResetPasswordCommand;
   verifyEmailCommand: VerifyEmailCommand;
   getUserByIdQuery: GetUserByIdQuery;
   getUserByPhoneQuery: GetUserByPhoneQuery;
+  getUserIdIfExistsQuery: GetUserIdIfExistsQuery;
   exampleService: ExampleService;
   exampleCommand: ExampleCommand;
   getAllExampleQuery: getAllExampleQuery;
@@ -44,10 +48,12 @@ export const diList = {
   tokenService: TokenService,
   loginCommand: LoginCommand,
   refreshTokenCommand: RefreshTokenCommand,
+  registerUserCommand: RegisterUserCommand,
   resetPasswordCommand: ResetPasswordCommand,
   verifyEmailCommand: VerifyEmailCommand,
   getUserByIdQuery: GetUserByIdQuery,
   getUserByPhoneQuery: GetUserByPhoneQuery,
+  getUserIdIfExistsQuery: GetUserIdIfExistsQuery,
   exampleService: ExampleService,
   exampleCommand: ExampleCommand,
   getAllExampleQuery: getAllExampleQuery,

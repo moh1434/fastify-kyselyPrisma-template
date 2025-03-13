@@ -11,7 +11,7 @@ export const Roles = {
 } as const;
 export type Roles = (typeof Roles)[keyof typeof Roles];
 export type User = {
-  id: string;
+  id: Generated<string>;
   role: Roles;
   fullName: string;
   phone: string;
@@ -19,7 +19,7 @@ export type User = {
   password: string;
   image: string | null;
   email: string;
-  createdAt: Generated<Timestamp>;
+  createdAt: Timestamp;
   updatedAt: Timestamp;
   deletedAt: Timestamp | null;
 };

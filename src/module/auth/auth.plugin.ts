@@ -34,7 +34,18 @@ export const setupAuthPlugin = fastifyPlugin(async (fastify, opts) => {
       );
     }
 
-    const tokenPayload = await request.jwtVerify<TokenPayload>();
+    let tokenPayload: TokenPayload;
+
+    try {
+      tokenPayload = await request.jwtVerify<TokenPayload>();
+    } catch (e) {
+      if (request.routeOptions.config.roles === "GUEST_ONLY") {
+        return;
+      } else {
+        throw e;
+      }
+    }
+
     if (request.routeOptions.config.roles === "ANY_USER") {
       return;
     }
@@ -44,7 +55,10 @@ export const setupAuthPlugin = fastifyPlugin(async (fastify, opts) => {
 
     throw APP_ERROR.FORBIDDEN({
       current_role: tokenPayload.role || "undefined",
-      accepted_roles: request.routeOptions.config.roles.join(","),
+      accepted_roles:
+        request.routeOptions.config.roles === "GUEST_ONLY"
+          ? "GUEST_ONLY"
+          : request.routeOptions.config.roles.join(","),
     });
   });
 });

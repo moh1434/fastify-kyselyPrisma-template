@@ -3,7 +3,7 @@ import { type TFunction } from "i18next";
 import { TokenPayload } from "src/module/auth/dto/token.dto.ts";
 import { configSchema } from "../../core/plugin/env.plugin.ts";
 import { JwtWithRefresh } from "../../module/auth/types.ts";
-
+import { Roles } from "../../db/types.ts";
 // Extend FastifyInstance to include the env property
 
 declare module "fastify" {
@@ -17,7 +17,7 @@ declare module "fastify" {
   }
 
   interface FastifyContextConfig {
-    roles: Roles[] | "PUBLIC" | "ANY_USER";
+    roles: Roles[] | "PUBLIC" | "ANY_USER" | "GUEST_ONLY";
   }
 }
 

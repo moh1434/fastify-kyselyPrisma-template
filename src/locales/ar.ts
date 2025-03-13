@@ -7,7 +7,7 @@ export const arabicTranslation = {
         "الصلاحية التي لديك: {{current_role}} بينما الصلاحيات المطلوبة: {{accepted_roles}}", //"ليست لديك صلاحية للقيام بهذا العملية"
       notFound: "غير موجود {{resource}}",
       requestTimeout: "انتهت مهلة الطلب",
-      conflict: "القيمة موجودة مسبقا {{resource}}",
+      conflict: "موجود مسبقا",
       internalServerError: "خطأ في الخادم حاول مرة اخرى",
       badGateway: "بوابة غير صالحة",
     },
@@ -28,6 +28,7 @@ export const arabicTranslation = {
       invalid_phone_number:
         "رقم الهاتف يجب ان يحتوي على ١٠ ارقام ويبدأ ب ٠ او +٩٦٤",
       invalid_password: "الرمز السري يجب ان يحتوي على ٨ حروف",
+      invalid_confirmation_password: "الرمز السري غير متطابق",
     },
     errors: {
       invalid_type: "المتوقع {{expected}}، ولكن تم استلام {{received}}",
@@ -115,9 +116,10 @@ export const arabicTranslation = {
       },
     },
     fields: {
-      password: "الرمز السري",
       email: "البريد الإلكتروني",
       phone: "رقم الهاتف",
+      password: "الرمز السري",
+      confirmPassword: "تأكيد الرمز السري",
     },
     validations: {
       email: "البريد الإلكتروني",

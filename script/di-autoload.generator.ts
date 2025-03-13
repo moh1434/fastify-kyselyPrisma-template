@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
-import { filterNullable } from "../src/utils/type/filterNullable";
+import { removeNullable } from "../src/utils/helpers/removeNullable.ts";
 
-import { ObjectKeys } from "../src/utils/helpers/objects";
+import { ObjectKeys } from "../src/utils/helpers/objects.ts";
 // Directory to search for use case files
 const scanDir = path.resolve("src/module");
 const outputFile = path.resolve("src/utils/generated/di.generated.ts"); // Path to the output file
@@ -48,7 +48,7 @@ function generateModuleDeclaration(
   dynamicDependenciesToAdd: DynamicDependenciesToAdd,
 ): string {
   // Extract class names and file paths from each file
-  const filesWithClasses = filterNullable(
+  const filesWithClasses = removeNullable(
     files.map((file) => {
       const content = fs.readFileSync(file, "utf-8");
       const classMatch = content.match(/export default class (\w+)/);

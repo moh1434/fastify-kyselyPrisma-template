@@ -28,7 +28,7 @@ enum Roles {
 }
 
 model User {
-  id            String    @id @default(uuid())
+  id            String    @id @default(dbgenerated("gen_random_uuid()"))
   role          Roles
   fullName      String
   phone         String    @unique
@@ -36,7 +36,7 @@ model User {
   password      String
   image         String?
   email         String    @unique
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime
+  updatedAt     DateTime
   deletedAt     DateTime?
 }

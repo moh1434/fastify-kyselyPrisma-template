@@ -1,5 +1,6 @@
-import { envPlugin, registerDotEnv } from "./plugin/env.plugin.js";
+import { registerDotEnv } from "../utils/helpers/registerDotEnv.js";
 registerDotEnv();
+import { envPlugin } from "./plugin/env.plugin.js";
 import Fastify from "fastify";
 import helmet from "@fastify/helmet";
 import FastifyMultipart from "@fastify/multipart";

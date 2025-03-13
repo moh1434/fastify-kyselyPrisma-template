@@ -1,4 +1,9 @@
-import type { Kysely, ColumnType } from "kysely";
+import type {
+  Kysely,
+  ColumnType,
+  InsertObject,
+  ExpressionBuilder,
+} from "kysely";
 import { DB } from "../../db/types.js";
 
 export type KyselyDB = Kysely<DB>;
@@ -15,3 +20,15 @@ type SnakeToCamel<S extends string> = S extends `${infer T}_${infer U}`
 export type DbType<T> = {
   [K in keyof T as SnakeToCamel<K & string>]: ExtractColumnType<T[K]>;
 };
+type InsertObjectOrList<DB, TB extends keyof DB> =
+  | InsertObject<DB, TB>
+  | ReadonlyArray<InsertObject<DB, TB>>;
+type InsertObjectOrListFactory<
+  TB extends keyof DB,
+  UT extends keyof DB = never,
+> = (eb: ExpressionBuilder<DB, TB | UT>) => InsertObjectOrList<DB, TB>;
+
+export type InsertExpression<
+  TB extends keyof DB,
+  UT extends keyof DB = never,
+> = InsertObjectOrList<DB, TB> | InsertObjectOrListFactory<TB, UT>;
