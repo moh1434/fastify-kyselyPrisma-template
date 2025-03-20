@@ -1,7 +1,7 @@
 import { baseController } from "../shared/base.controller.js";
-import { loginDto } from "./dto/login.dto.js";
+import { LoginDto } from "./dto/login.dto.js";
 import { refreshTokenDto } from "./dto/refresh-token.dto.js";
-import { registerDto } from "./dto/register.dto.js";
+import { RegisterDto } from "./dto/register.dto.js";
 
 export const authController = baseController(
   async (fastify) => {
@@ -12,7 +12,7 @@ export const authController = baseController(
           roles: "PUBLIC",
         },
         schema: {
-          body: loginDto,
+          body: LoginDto,
         },
       },
       async (request, reply) => {
@@ -43,7 +43,7 @@ export const authController = baseController(
           roles: "GUEST_ONLY",
         },
         schema: {
-          body: registerDto,
+          body: RegisterDto,
         },
       },
       async (request, reply) => {

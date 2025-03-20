@@ -45,6 +45,13 @@ async function init() {
   app.register(setupControllersPlugin);
 
   await app.ready();
+
+  ["SIGINT", "SIGTERM"].forEach(async (signal) => {
+    process.on(signal, async () => {
+      await fastify.close();
+      process.exit(0);
+    });
+  });
   if (process.env.NODE_ENV === "test") {
     return app;
   }
@@ -58,13 +65,6 @@ async function init() {
     fastify.log.info(
       `Swagger endpoint: ${address}${app.config.SWAGGER_DOCS_LINK}`,
     );
-  });
-
-  ["SIGINT", "SIGTERM"].forEach(async (signal) => {
-    process.on(signal, async () => {
-      await fastify.close();
-      process.exit(0);
-    });
   });
 }
 

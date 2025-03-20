@@ -161,9 +161,9 @@ type Result<T extends string> = {
 /**
  * generate static uuid v4
  * @example
- * const { user1Id } = getNamedId("user1");
+ * const { user1Id } = getFullNamedId("user1");
  */
-export function getNamedId<T extends string>(
+export function getFullNamedId<T extends string>(
   baseName: T,
   index = 0,
 ): Result<T> {

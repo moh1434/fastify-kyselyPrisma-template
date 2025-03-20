@@ -16,7 +16,7 @@ describe("Seed Seed Seed.test.ts", () => {
     db = fastify!.diContainer.cradle.db;
   });
 
-  it("should get the same seed user from the DB", async () => {
+  it.sequential("should get the same seed user from the DB", async () => {
     const seededUser = await db
       .selectFrom("User")
       .where("User.phone", "=", usersForSeed.member.normal[0].phone)

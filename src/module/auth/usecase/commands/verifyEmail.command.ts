@@ -1,4 +1,4 @@
-import { loginDto } from "../../dto/login.dto.js";
+import { LoginDto } from "../../dto/login.dto.js";
 import { PasswordService } from "../../service/password.service.js";
 import { configSchema } from "../../../../core/plugin/env.plugin.js";
 import { JwtWithRefresh } from "../../types.js";
@@ -12,5 +12,5 @@ export default class VerifyEmailCommand {
     private config: configSchema,
   ) {}
 
-  async execute(dto: loginDto) {}
+  async execute(dto: LoginDto) {}
 }

@@ -1,7 +1,7 @@
 import { PasswordService } from "../../service/password.service.js";
 import { APP_ERROR } from "../../../../utils/error/appErrors.js";
 import { configSchema } from "../../../../core/plugin/env.plugin.js";
-import { registerDto } from "../../dto/register.dto.js";
+import { RegisterDto } from "../../dto/register.dto.js";
 import GetUserIdIfExistsQuery from "../queries/getUserIdIfExists.query.js";
 import type {
   InsertExpression,
@@ -16,7 +16,7 @@ export default class RegisterUserCommand {
     private getUserIdIfExistsQuery: GetUserIdIfExistsQuery,
   ) {}
 
-  async execute(dto: registerDto, customId?: string) {
+  async execute(dto: RegisterDto, customId?: string) {
     const user = await this.getUserIdIfExistsQuery.execute(dto.phone);
     if (user) {
       throw APP_ERROR.CONFLICT();
@@ -29,7 +29,7 @@ export default class RegisterUserCommand {
       id: customId || undefined,
       role: "MEMBER",
       password: hashedPassword,
-      fullName: `${dto.firstName} ${dto.secondName}`,
+      fullName: `${dto.firstName} ${dto.secondName} ${dto.thirdName}`,
       phone: dto.phone,
       email: dto.email,
       verifiedPhone: false,

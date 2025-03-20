@@ -44,6 +44,9 @@ export const setupErrorPlugin = fastifyPlugin(async (fastify, opts) => {
       reply.send(error);
       return;
     }
+    if (fastify.config.NODE_ENV === "test") {
+      console.log(error);
+    }
 
     reply.status(error.httpStatus).send({
       statusCode: error.httpStatus,

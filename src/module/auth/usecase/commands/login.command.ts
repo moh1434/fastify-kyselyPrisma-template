@@ -1,4 +1,4 @@
-import { loginDto } from "../../dto/login.dto.js";
+import { LoginDto } from "../../dto/login.dto.js";
 import { PasswordService } from "../../service/password.service.js";
 import { APP_ERROR } from "../../../../utils/error/appErrors.js";
 import { configSchema } from "../../../../core/plugin/env.plugin.js";
@@ -15,7 +15,7 @@ export default class LoginCommand {
     private tokenService: TokenService,
   ) {}
 
-  async execute(dto: loginDto) {
+  async execute(dto: LoginDto) {
     const user = await this.getUserByPhoneQuery.execute(dto.phone);
 
     const isMatch = await this.passwordService.verify(

@@ -26,7 +26,7 @@ const names = Object.freeze(
 );
 type name = (typeof names)[number];
 
-export function getName(index = 0, iterations = 0): string {
+export function getFullName(index = 0, iterations = 0): string {
   if (index >= names.length) {
     index = 0;
     iterations++;
@@ -38,3 +38,21 @@ export function getName(index = 0, iterations = 0): string {
   }
   return theName.fullName;
 }
+
+export function getName(index = 0, iterations = 0): NameParts {
+  if (index >= names.length) {
+    index = 0;
+    iterations++;
+  }
+  const theName = _names[index++];
+  if (iterations) {
+    theName.thirdName = theName.thirdName + (iterations || "");
+  }
+  return theName;
+}
+
+type NameParts = {
+  firstName: string;
+  secondName: string;
+  thirdName: string;
+};
