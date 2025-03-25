@@ -2,7 +2,7 @@ import { PasswordService } from "../../service/password.service.js";
 import { APP_ERROR } from "../../../../utils/error/appErrors.js";
 import { configSchema } from "../../../../core/plugin/env.plugin.js";
 import { RegisterDto } from "../../dto/register.dto.js";
-import GetUserIdIfExistsQuery from "../queries/getUserIdIfExists.query.js";
+import GetUserIdIfExistsQuery from "../../../user/usecase/queries/getUserIdIfExists.query.js";
 import type {
   InsertExpression,
   KyselyDB,

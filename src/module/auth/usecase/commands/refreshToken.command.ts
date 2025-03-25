@@ -1,6 +1,6 @@
 import { TokenPayload } from "../../dto/token.dto.js";
 import { JwtWithRefresh } from "../../types.js";
-import GetUserByIdQuery from "../queries/getUserById.query.js";
+import GetUserByIdQuery from "../../../user/usecase/queries/getUserById.query.js";
 import { TokenService } from "../../service/token.service.js";
 
 export default class RefreshTokenCommand {

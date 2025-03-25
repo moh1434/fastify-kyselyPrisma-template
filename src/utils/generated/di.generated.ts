@@ -7,9 +7,9 @@ import RefreshTokenCommand from "../../module/auth/usecase/commands/refreshToken
 import RegisterUserCommand from "../../module/auth/usecase/commands/registerUser.command.js";
 import ResetPasswordCommand from "../../module/auth/usecase/commands/resetPassword.command.js";
 import VerifyEmailCommand from "../../module/auth/usecase/commands/verifyEmail.command.js";
-import GetUserByIdQuery from "../../module/auth/usecase/queries/getUserById.query.js";
-import GetUserByPhoneQuery from "../../module/auth/usecase/queries/getUserByPhone.query.js";
-import GetUserIdIfExistsQuery from "../../module/auth/usecase/queries/getUserIdIfExists.query.js";
+import GetUserByIdQuery from "../../module/user/usecase/queries/getUserById.query.js";
+import GetUserByPhoneQuery from "../../module/user/usecase/queries/getUserByPhone.query.js";
+import GetUserIdIfExistsQuery from "../../module/user/usecase/queries/getUserIdIfExists.query.js";
 import { ExampleService } from "../../module/example/service/example.service.js";
 import ExampleCommand from "../../module/example/usecase/commands/example.command.js";
 import getAllExampleQuery from "../../module/example/usecase/queries/getAllExample.query.js";

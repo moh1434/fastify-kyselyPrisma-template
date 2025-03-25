@@ -2,7 +2,7 @@ import { LoginDto } from "../../dto/login.dto.js";
 import { PasswordService } from "../../service/password.service.js";
 import { APP_ERROR } from "../../../../utils/error/appErrors.js";
 import { configSchema } from "../../../../core/plugin/env.plugin.js";
-import GetUserByPhoneQuery from "../queries/getUserByPhone.query.js";
+import GetUserByPhoneQuery from "../../../user/usecase/queries/getUserByPhone.query.js";
 import { TokenService } from "../../service/token.service.js";
 import { KyselyDB } from "../../../../utils/type/kysely.js";
 

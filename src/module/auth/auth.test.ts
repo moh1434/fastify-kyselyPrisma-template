@@ -3,7 +3,7 @@ import { fastify } from "../../core/main.js";
 import { type RegisterDto } from "./dto/register.dto.js";
 import { type LoginDto } from "./dto/login.dto.js";
 import { TEST_HASHED_PASSWORD } from "../../utils/test/generateUsers.js";
-import GetUserByIdQuery from "./usecase/queries/getUserById.query.js";
+import GetUserByIdQuery from "../user/usecase/queries/getUserById.query.js";
 import { testUsers } from "../../db/data/usersSeedPayload.js";
 
 describe("Auth Controller", () => {
