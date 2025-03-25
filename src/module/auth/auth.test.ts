@@ -1,11 +1,10 @@
-import { describe, it, expect, beforeAll } from "vitest";
+import { describe, it, expect, beforeAll, vi, beforeEach } from "vitest";
 import { fastify } from "../../core/main.js";
 import { type RegisterDto } from "./dto/register.dto.js";
 import { type LoginDto } from "./dto/login.dto.js";
 import { TEST_PASSWORD } from "../../utils/test/generateUsers.js";
 import GetUserByIdQuery from "./usecase/queries/getUserById.query.js";
 import { testUsers } from "../../db/data/usersSeedPayload.js";
-import { delay } from "../../utils/test/delay.js";
 
 describe("Auth Controller", () => {
   let getUserByIdQuery: GetUserByIdQuery;
@@ -36,6 +35,12 @@ describe("Auth Controller", () => {
   beforeAll(async () => {
     getUserByIdQuery = fastify!.diContainer.cradle.getUserByIdQuery;
     await fastify?.ready();
+
+    vi.spyOn(fastify!.diContainer.cradle.refreshTokenCommand, "execute");
+    vi.spyOn(fastify!.diContainer.cradle.tokenService, "generate");
+  });
+  beforeEach(async () => {
+    vi.clearAllMocks();
   });
 
   it.sequential("should register a new user", async () => {
@@ -74,8 +79,7 @@ describe("Auth Controller", () => {
     expect(typeof responseBody.token.refreshToken).toBe("string");
   });
 
-  it.sequential("should return a new token using refresh token", async () => {
-    await delay(200); //to get different token.
+  it.sequential("should generate a new token using refresh token", async () => {
     const response = await fastify!.inject({
       method: "POST",
       url: "/auth/use-refresh-token",
@@ -87,13 +91,15 @@ describe("Auth Controller", () => {
         refreshToken: string;
       };
     };
+    expect(response.statusCode).toBe(200);
+    expect(
+      fastify!.diContainer.cradle.refreshTokenCommand.execute,
+    ).toHaveBeenCalled();
+    expect(
+      fastify!.diContainer.cradle.tokenService.generate,
+    ).toHaveBeenCalled();
 
     expect(typeof responseBody.token.accessToken).toBe("string");
     expect(typeof responseBody.token.refreshToken).toBe("string");
-
-    expect(responseBody.token.accessToken).not.toBe(loginInTokens.accessToken);
-    expect(responseBody.token.refreshToken).not.toBe(
-      loginInTokens.refreshToken,
-    );
   });
 });

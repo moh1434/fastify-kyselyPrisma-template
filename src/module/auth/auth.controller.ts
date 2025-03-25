@@ -31,7 +31,7 @@ export const authController = baseController(
       },
       async (request, reply) => {
         const headers: refreshTokenDto = request.headers;
-        return await request.diScope.cradle.refreshTokenCommand.execute(
+        return await fastify.diContainer.cradle.refreshTokenCommand.execute(
           headers.authorization,
         );
       },

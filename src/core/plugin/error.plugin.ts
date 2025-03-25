@@ -34,6 +34,8 @@ export const setupErrorPlugin = fastifyPlugin(async (fastify, opts) => {
       );
     }
     if (error["APP_ERROR_LABEL"] != APP_ERROR_LABEL) {
+      console.log("log:", error);
+
       if (typeof error === "string") {
         reply.status(500).send({
           statusCode: 500,
@@ -44,10 +46,9 @@ export const setupErrorPlugin = fastifyPlugin(async (fastify, opts) => {
       reply.send(error);
       return;
     }
-    if (fastify.config.NODE_ENV === "test") {
-      console.log(error);
+    if (fastify.config.NODE_ENV === "test" && error?.httpStatus === 500) {
+      console.log("test log:", error);
     }
-
     reply.status(error.httpStatus).send({
       statusCode: error.httpStatus,
       params: error.params,
@@ -61,5 +62,6 @@ export const setupErrorPlugin = fastifyPlugin(async (fastify, opts) => {
         (error as any)?.message ??
         (error as any)?.defaultMessage,
     });
+    return;
   });
 });
