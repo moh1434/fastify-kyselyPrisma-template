@@ -5,6 +5,7 @@ import { type LoginDto } from "./dto/login.dto.js";
 import { TEST_PASSWORD } from "../../utils/test/generateUsers.js";
 import GetUserByIdQuery from "./usecase/queries/getUserById.query.js";
 import { testUsers } from "../../db/data/usersSeedPayload.js";
+import { delay } from "../../utils/test/delay.js";
 
 describe("Auth Controller", () => {
   let getUserByIdQuery: GetUserByIdQuery;
@@ -74,6 +75,7 @@ describe("Auth Controller", () => {
   });
 
   it.sequential("should return a new token using refresh token", async () => {
+    await delay(200); //to get different token.
     const response = await fastify!.inject({
       method: "POST",
       url: "/auth/use-refresh-token",
