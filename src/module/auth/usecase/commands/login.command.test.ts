@@ -1,5 +1,4 @@
 import { describe, it, expect, beforeEach, beforeAll, vi } from "vitest";
-import { loginDto } from "../../dto/login.dto.js";
 import { PasswordService } from "../../service/password.service.js";
 import { APP_ERROR } from "../../../../utils/error/appErrors.js";
 import { configSchema } from "../../../../core/plugin/env.plugin.js";
@@ -8,8 +7,6 @@ import { TokenService } from "../../service/token.service.js";
 import { DbType, KyselyDB } from "../../../../utils/type/kysely.js";
 import LoginCommand from "./login.command.js";
 import { fastify } from "../../../../core/main.js";
-import { User } from "../../../../db/types.js";
-import { defaultTestPassword } from "../../../../utils/test/generateUsers.js";
 import { usersForSeed } from "../../../../db/data/usersSeedPayload.js";
 import { spyAllMethods } from "../../../../utils/test/spyAllMethods.js";
 
