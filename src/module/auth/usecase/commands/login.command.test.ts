@@ -63,7 +63,7 @@ describe("LoginCommand", () => {
       phone: usersForSeed.member.normal[1].phone,
       password: "wrong_password",
     };
-    expect(loginCommand.execute(dto)).rejects.toMatchObject(
+    await expect(loginCommand.execute(dto)).rejects.toMatchObject(
       APP_ERROR.WRONG_PASSWORD({ resource: "password" }),
     );
 
