@@ -13,6 +13,18 @@ export const setupAuthPlugin = fastifyPlugin(async (fastify, opts) => {
   });
 
   fastify.addHook("onRequest", async (request, reply) => {
+    if (!request?.routeOptions?.config?.roles) {
+      throw APP_ERROR.INTERNAL_SERVER_ERROR(
+        {
+          directMessage:
+            "endpoint not found or request.routeOptions.config is undefined",
+        },
+        {
+          url: request.url,
+          method: request.method,
+        },
+      );
+    }
     // Skip public routes
     if (
       request.routeOptions.config.roles === "PUBLIC" ||
@@ -20,18 +32,6 @@ export const setupAuthPlugin = fastifyPlugin(async (fastify, opts) => {
       request.url.startsWith(fastify.config.SWAGGER_DOCS_LINK)
     ) {
       return;
-    }
-
-    if (!request?.routeOptions?.config?.roles) {
-      throw APP_ERROR.INTERNAL_SERVER_ERROR(
-        {
-          directMessage: "request.routeOptions.config is undefined",
-        },
-        {
-          url: request.url,
-          method: request.method,
-        },
-      );
     }
 
     let tokenPayload: TokenPayload;
