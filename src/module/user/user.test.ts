@@ -56,6 +56,6 @@ describe("Auth Controller", () => {
 
     expect(updatedProfile.fullName).toBeDefined();
 
-    expect(updatedProfile.fullName).not.toBe(oldProfile);
+    expect(updatedProfile.fullName).not.toBe(oldProfile.fullName);
   });
 });
