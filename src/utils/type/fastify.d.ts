@@ -9,6 +9,7 @@ import { Roles } from "../../db/types.ts";
 declare module "fastify" {
   interface FastifyRequest {
     t: TFunction<"ns1", undefined>;
+    tokenData: TokenPayload;
   }
   interface FastifyInstance {
     config: configSchema;

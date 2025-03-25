@@ -1,3 +1,5 @@
+import { fullNameFrom } from "../helpers/fullName.js";
+
 let index = 0;
 let iterations = 0;
 const _names = [
@@ -21,7 +23,7 @@ const _names = [
 const names = Object.freeze(
   _names.map((n) => ({
     ...n,
-    fullName: `${n.firstName} ${n.secondName} ${n.thirdName}`,
+    fullName: fullNameFrom(n),
   })),
 );
 type name = (typeof names)[number];

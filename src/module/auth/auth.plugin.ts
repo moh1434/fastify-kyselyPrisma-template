@@ -38,6 +38,7 @@ export const setupAuthPlugin = fastifyPlugin(async (fastify, opts) => {
 
     try {
       tokenPayload = await request.jwtVerify<TokenPayload>();
+      request.tokenData = tokenPayload;
     } catch (e) {
       if (request.routeOptions.config.roles === "GUEST_ONLY") {
         return;

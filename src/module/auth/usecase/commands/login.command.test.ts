@@ -9,6 +9,7 @@ import LoginCommand from "./login.command.js";
 import { fastify } from "../../../../core/main.js";
 import { usersForSeed } from "../../../../db/data/usersSeedPayload.js";
 import { spyAllMethods } from "../../../../utils/test/spyAllMethods.js";
+import { TEST_PASSWORD } from "../../../../utils/test/generateUsers.js";
 
 describe("LoginCommand", () => {
   let loginCommand: LoginCommand;
@@ -39,7 +40,7 @@ describe("LoginCommand", () => {
   it("should return a token when login is successful", async () => {
     const dto = {
       phone: usersForSeed.member.normal[0].phone,
-      password: "testTest",
+      password: TEST_PASSWORD,
     };
 
     const { token } = await loginCommand.execute(dto);

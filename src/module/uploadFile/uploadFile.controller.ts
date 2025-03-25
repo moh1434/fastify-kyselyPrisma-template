@@ -19,12 +19,13 @@ export const uploadFileController = baseController(
         },
       },
       async (request, reply) => {
-        const { link } = await request.diScope.cradle.uploadFileCommand.execute(
-          {
-            file: request.body.file,
-          },
-          request.query,
-        );
+        const { link } =
+          await fastify.diContainer.cradle.uploadFileCommand.execute(
+            {
+              file: request.body.file,
+            },
+            request.query,
+          );
         reply.send({ link });
         return reply;
       },
@@ -48,7 +49,7 @@ export const uploadFileController = baseController(
         );
 
         reply.send(
-          await request.diScope.cradle.uploadFileService.get(
+          await fastify.diContainer.cradle.uploadFileService.get(
             request.query.link,
           ),
         );

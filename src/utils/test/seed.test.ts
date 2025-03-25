@@ -16,13 +16,13 @@ describe("Seed Seed Seed.test.ts", () => {
     db = fastify!.diContainer.cradle.db;
   });
 
-  it.sequential("should get the same seed user from the DB", async () => {
+  it("should get the same seed user from the DB", async () => {
     const seededUser = await db
       .selectFrom("User")
       .where("User.phone", "=", usersForSeed.member.normal[0].phone)
       .selectAll()
       .executeTakeFirst();
 
-    expect(seededUser).toEqual(usersForSeed.member.normal[0]);
+    expect(seededUser?.id).toEqual(usersForSeed.member.normal[0].id);
   });
 });

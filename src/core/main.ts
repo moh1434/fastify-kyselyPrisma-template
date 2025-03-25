@@ -19,6 +19,11 @@ import { setupErrorPlugin } from "./plugin/error.plugin.js";
 import { setupI18Plugin } from "./plugin/i18.plugin.js";
 import { setupAuthPlugin } from "../module/auth/auth.plugin.js";
 import { kyselyLoadPlugin } from "./plugin/kysely.plugin.js";
+
+(BigInt as any).prototype.toJSON = function () {
+  return this.toString();
+};
+
 async function init() {
   const fastify = Fastify({
     logger: loggingConfig(),

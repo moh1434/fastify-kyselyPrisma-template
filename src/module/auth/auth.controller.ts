@@ -16,7 +16,9 @@ export const authController = baseController(
         },
       },
       async (request, reply) => {
-        return await request.diScope.cradle.loginCommand.execute(request.body);
+        return await fastify.diContainer.cradle.loginCommand.execute(
+          request.body,
+        );
       },
     );
     fastify.post(
@@ -47,7 +49,7 @@ export const authController = baseController(
         },
       },
       async (request, reply) => {
-        return await request.diScope.cradle.registerUserCommand.execute(
+        return await fastify.diContainer.cradle.registerUserCommand.execute(
           request.body,
         );
       },

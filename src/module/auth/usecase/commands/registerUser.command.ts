@@ -7,6 +7,7 @@ import type {
   InsertExpression,
   KyselyDB,
 } from "../../../../utils/type/kysely.js";
+import { fullNameFrom } from "../../../../utils/helpers/fullName.js";
 
 export default class RegisterUserCommand {
   constructor(
@@ -29,7 +30,7 @@ export default class RegisterUserCommand {
       id: customId || undefined,
       role: "MEMBER",
       password: hashedPassword,
-      fullName: `${dto.firstName} ${dto.secondName} ${dto.thirdName}`,
+      fullName: fullNameFrom(dto),
       phone: dto.phone,
       email: dto.email,
       verifiedPhone: false,

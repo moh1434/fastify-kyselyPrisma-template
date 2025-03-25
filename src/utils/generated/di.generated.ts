@@ -19,6 +19,7 @@ import { S3UploadService } from "../../module/uploadFile/service/s3Upload.servic
 import GetFileCommand from "../../module/uploadFile/usecase/commands/getFile.command.js";
 import UploadFileCommand from "../../module/uploadFile/usecase/commands/uploadFile.command.js";
 import UploadFileQuery from "../../module/uploadFile/usecase/queries/uploadFile.query.js";
+import UpdateProfileCommand from "../../module/user/usecase/commands/updateProfile.command.js";
 
 export interface DiCradle {
   passwordService: PasswordService;
@@ -40,6 +41,7 @@ export interface DiCradle {
   getFileCommand: GetFileCommand;
   uploadFileCommand: UploadFileCommand;
   uploadFileQuery: UploadFileQuery;
+  updateProfileCommand: UpdateProfileCommand;
   uploadFileService: LocalUploadService;
 }
 
@@ -63,5 +65,6 @@ export const diList = {
   getFileCommand: GetFileCommand,
   uploadFileCommand: UploadFileCommand,
   uploadFileQuery: UploadFileQuery,
+  updateProfileCommand: UpdateProfileCommand,
   uploadFileService: LocalUploadService,
 };

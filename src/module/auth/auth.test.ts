@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll, vi, beforeEach } from "vitest";
 import { fastify } from "../../core/main.js";
 import { type RegisterDto } from "./dto/register.dto.js";
 import { type LoginDto } from "./dto/login.dto.js";
-import { TEST_PASSWORD } from "../../utils/test/generateUsers.js";
+import { TEST_HASHED_PASSWORD } from "../../utils/test/generateUsers.js";
 import GetUserByIdQuery from "./usecase/queries/getUserById.query.js";
 import { testUsers } from "../../db/data/usersSeedPayload.js";
 
@@ -20,8 +20,8 @@ describe("Auth Controller", () => {
 
   const registerDto: RegisterDto = {
     phone: testUsers.member.normal[0].phone,
-    password: TEST_PASSWORD,
-    confirmPassword: TEST_PASSWORD,
+    password: TEST_HASHED_PASSWORD,
+    confirmPassword: TEST_HASHED_PASSWORD,
     email: testUsers.member.normal[0].email,
     firstName: testUsers.member.normal[0].firstName,
     secondName: testUsers.member.normal[0].secondName,
